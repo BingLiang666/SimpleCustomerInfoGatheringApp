@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,5 +15,86 @@
     </form>
     <h2>Existing Data:</h2>
     <pre>{{ data }}</pre>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Data Form</title>
+</head>
+<body>
+    <h1>Simple Data Form</h1>
+    <form id="dataForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label>College Level:</label><br>
+        <input type="radio" id="bs" name="college_level" value="BS" required>
+        <label for="bs">BS</label><br>
+        <input type="radio" id="ms" name="college_level" value="MS" required>
+        <label for="ms">MS</label><br><br>
+        
+        <label for="classes_taken">Classes Taken:</label>
+        <input type="text" id="classes_taken" name="classes_taken"><br><br>
+        
+        <label for="class_expectation">Class Expectation:</label><br>
+        <textarea id="class_expectation" name="class_expectation" rows="4" cols="50"></textarea><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById('dataForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const college_level = document.querySelector('input[name="college_level"]:checked').value;
+            const classes_taken = document.getElementById('classes_taken').value;
+            const class_expectation = document.getElementById('class_expectation').value;
+
+            // Create a data object
+            const data = {
+                name: name,
+                email: email,
+                college_level: college_level,
+                classes_taken: classes_taken,
+                class_expectation: class_expectation
+            };
+
+            // Send data to the server (you need to implement this part)
+            sendDataToServer(data);
+        });
+
+        // Function to send data to the server
+        function sendDataToServer(data) {
+            // You can use JavaScript's Fetch API or other methods to send data to your server.
+            // For this example, we'll use Fetch to send a POST request to the server.
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(message => {
+                // Display the server response
+                alert(message);
+                // Optionally, you can clear the form fields here
+                document.getElementById('dataForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
