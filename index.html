@@ -50,6 +50,9 @@
 
             // Send data to the server (you need to implement this part)
             sendDataToServer(data);
+
+            // Save data to a text file
+            saveDataToFile(data);
         });
 
         // Function to send data to the server
@@ -73,6 +76,24 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+        }
+
+
+        // Function to save data to a text file
+        function saveDataToFile(data) {
+            // Create a JSON string from the data object
+            const jsonData = JSON.stringify(data, null, 2);
+
+            // Create a Blob containing the JSON data
+            const blob = new Blob([jsonData], { type: 'application/json' });
+
+            // Create a download link
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'userdata.json';
+
+            // Programmatically click the link to trigger the download
+            a.click();
         }
     </script>
 </body>
