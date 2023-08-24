@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Data Form</title>
+    <title>Simple Student Info Gathering App</title>
 </head>
 <body>
-    <h1>Simple Data Form</h1>
+    <h1>Simple Student Info Gathering App</h1>
     <form id="dataForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -48,7 +48,7 @@
                 class_expectation: class_expectation
             };
 
-            // Send data to the server (you need to implement this part)
+            // Send data to the server
             sendDataToServer(data);
 
             // Save data to a text file
@@ -89,7 +89,7 @@
             // Create a download link
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'userdata.json';
+            a.download = 'student_info.json';
 
             // Programmatically click the link to trigger the download
             a.click();
